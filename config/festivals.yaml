@@ -1,0 +1,145 @@
+# GYODIFY Festival Calendar
+# !! VERIFY DATES EACH YEAR — run: python scripts/check_festivals.py !!
+
+# lead_days = how many days before to start posting festival content
+
+festivals:
+  - name: "Makar Sankranti"
+    date: "2027-01-14"
+    lead_days: 5
+    language_preference: hindi
+    tags: ["#makarsankranti", "#uttarayan", "#kiteseason"]
+
+  - name: "Republic Day"
+    date: "2027-01-26"
+    lead_days: 3
+    language_preference: hindi
+    tags: ["#republicday", "#26january", "#jaihind"]
+
+  - name: "Valentine's Day"
+    date: "2027-02-14"
+    lead_days: 7
+    language_preference: english
+    tags: ["#valentinesday", "#valentinegifts", "#giftsforhim", "#giftsforher"]
+
+  - name: "Holi"
+    date: "2027-03-01"
+    lead_days: 7
+    language_preference: hinglish
+    tags: ["#holi", "#happyholi", "#holifestival", "#colorsofholi"]
+
+  - name: "Gudi Padwa"
+    date: "2027-03-19"
+    lead_days: 5
+    language_preference: marathi
+    tags: ["#gudhipadwa", "#marathinewyear", "#gudhi", "#marathimulga"]
+
+  - name: "Ugadi"
+    date: "2027-03-19"
+    lead_days: 5
+    language_preference: english
+    tags: ["#ugadi", "#happyugadi", "#telugu", "#kannada"]
+
+  - name: "Eid ul-Fitr"
+    date: "2027-03-20"   # VERIFY — lunar calendar
+    lead_days: 7
+    language_preference: hinglish
+    tags: ["#eid", "#eidmubarak", "#eidfashion"]
+
+  - name: "Independence Day"
+    date: "2027-08-15"
+    lead_days: 5
+    language_preference: hinglish
+    tags: ["#independenceday", "#15august", "#jaihind"]
+
+  - name: "Onam"
+    date: "2027-08-27"   # VERIFY
+    lead_days: 5
+    language_preference: english
+    tags: ["#onam", "#happyonam", "#keralavibes"]
+
+  - name: "Ganesh Chaturthi"
+    date: "2027-08-25"   # VERIFY
+    lead_days: 7
+    language_preference: marathi
+    tags: ["#ganeshchaturthi", "#ganeshotsav", "#ganpati", "#ganpatibappamorya"]
+
+  - name: "Navratri"
+    date: "2027-10-10"   # VERIFY
+    lead_days: 5
+    language_preference: hinglish
+    tags: ["#navratri", "#garba", "#dandiya", "#navratrifashion"]
+
+  - name: "Dussehra"
+    date: "2027-10-19"   # VERIFY
+    lead_days: 3
+    language_preference: hinglish
+    tags: ["#dussehra", "#happydussehra", "#vijasyadashami"]
+
+  - name: "Diwali"
+    date: "2027-10-29"   # VERIFY
+    lead_days: 10
+    language_preference: hinglish
+    tags: ["#diwali", "#happydiwali", "#diwaligifts", "#festivewear", "#diwali2027"]
+
+  - name: "Bhai Dooj"
+    date: "2027-10-31"   # VERIFY
+    lead_days: 5
+    language_preference: hinglish
+    tags: ["#bhaidooj", "#bhaibehen", "#rakshabandhan"]
+
+  - name: "Christmas"
+    date: "2027-12-25"
+    lead_days: 10
+    language_preference: english
+    tags: ["#christmas", "#xmas", "#christmasgifts", "#secretsanta"]
+
+  - name: "New Year"
+    date: "2028-01-01"
+    lead_days: 7
+    language_preference: english
+    tags: ["#newyear", "#newyear2028", "#happynewyear", "#nyeoutfit"]
+
+# ── Recurring season triggers ──
+seasons:
+  - name: "IPL Season"
+    start_month: 3
+    end_month: 5
+    signal: ipl
+    lead_days: 5
+    tags: ["#ipl", "#iplseason", "#cricket"]
+
+  - name: "Board Exam Season"
+    start_month: 2
+    end_month: 4
+    signal: exams
+    lead_days: 3
+    tags: ["#boardexams", "#examseason", "#studygrind"]
+
+  - name: "College Fest Season"
+    start_month: 1
+    end_month: 3
+    signal: college_fests
+    lead_days: 5
+    tags: ["#collegefest", "#techfest", "#culturalest"]
+
+  - name: "Wedding Season"
+    start_month: 11
+    end_month: 2
+    signal: weddings
+    lead_days: 5
+    tags: ["#weddingseason", "#weddingguest", "#weddinglook"]
+
+  - name: "Monsoon"
+    start_month: 6
+    end_month: 9
+    signal: monsoon
+    lead_days: 0
+    tags: ["#monsoon", "#rainyseason", "#monsoonvibes"]
+
+  - name: "Winter Fashion"
+    start_month: 11
+    end_month: 2
+    signal: winter
+    lead_days: 0
+    tags: ["#winterfashion", "#winterlook", "#cozyvibes"]

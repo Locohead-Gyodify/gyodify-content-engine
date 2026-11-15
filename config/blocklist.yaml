@@ -1,0 +1,72 @@
+# GYODIFY Blocklist
+# Any concept/hashtag/caption hitting these terms is auto-rejected
+
+blocked_brands:
+  - marvel
+  - disney
+  - pixar
+  - dc comics
+  - stranger things
+  - harry potter
+  - "diet coke"
+  - "coca cola"
+  - pepsi
+  - "jack daniels"
+  - supreme
+  - gucci
+  - louis vuitton
+  - "h&m"
+  - zara
+  - myntra
+  - ajio
+  - meesho
+
+blocked_topics:
+  - politics
+  - religion
+  - death
+  - tragedy
+  - disaster
+  - accident
+  - crime
+  - violence
+  - communal
+  - election
+  - war
+  - protest
+  - riot
+  - terrorism
+  - covid
+  - pandemic
+  - suicide
+  - depression
+  - body shaming
+  - racism
+  - casteism
+
+blocked_hashtags:
+  - "#followforfollow"
+  - "#f4f"
+  - "#likeforlike"
+  - "#l4l"
+  - "#spam4spam"
+  - "#TagsForLikes"
+
+# Products with these keywords in title/tags are flagged as potentially licensed
+licensed_graphic_patterns:
+  - "mickey"
+  - "minnie"
+  - "spider-man"
+  - "batman"
+  - "superman"
+  - "pokemon"
+  - "naruto"
+  - "dragon ball"
+  - "BTS"
+  - "K-pop"
+  - "IPL"
+  - "CSK"
+  - "MI "
+  - "RCB"
+  - "NBA"
+  - "NFL"

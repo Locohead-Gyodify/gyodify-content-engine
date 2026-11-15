@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1350px;overflow:hidden;}
+body{background:var(--p-bg,#FDF0E8);color:var(--p-fg,#2B1F1A);font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;display:flex;flex-direction:column;padding:7% 8%;position:relative;}
+.corner-tri{position:absolute;top:0;right:0;width:40%;height:40%;background:var(--p-acc,#D4845A);opacity:.2;clip-path:polygon(100% 0,100% 100%,0 0);}
+.ghost-num{font-family:'Bebas Neue',sans-serif;font-size:160px;line-height:1;color:var(--p-acc,#D4845A);opacity:.15;position:absolute;right:6%;top:4%;z-index:1;}
+.eyebrow{font-size:9px;font-weight:600;color:var(--p-acc,#D4845A);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;position:relative;z-index:2;}
+.headline{font-family:'Bebas Neue',sans-serif;font-size:68px;line-height:.92;color:var(--p-fg,#2B1F1A);margin-bottom:16px;position:relative;z-index:2;}
+.headline .hl{color:var(--p-acc,#D4845A);}
+.steps{display:flex;flex-direction:column;gap:12px;flex:1;position:relative;z-index:2;}
+.step{display:flex;gap:14px;align-items:flex-start;}
+.step-num{min-width:28px;height:28px;background:var(--p-acc,#D4845A);color:white;border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-text{font-size:15px;color:var(--p-fg,#2B1F1A);line-height:1.5;opacity:.8;}
+.footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,.12);padding-top:12px;margin-top:14px;position:relative;z-index:2;}
+.logo{height:16px;}
+.swipe{font-size:9px;font-weight:600;color:var(--p-acc,#D4845A);letter-spacing:.06em;text-transform:uppercase;}
+/* CTA final slide */
+.cta-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;}
+.cta-headline{font-family:'Bebas Neue',sans-serif;font-size:80px;line-height:.90;text-align:center;color:var(--p-fg,#2B1F1A);margin-bottom:24px;}
+.cta-btn{display:inline-block;background:var(--p-acc,#D4845A);color:white;font-size:12px;font-weight:700;padding:14px 32px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="corner-tri"></div>
+<div class="ghost-num" id="ghost-num">01</div>
+<div class="eyebrow" id="eyebrow"></div>
+<div class="headline" id="headline"></div>
+<div id="middle-area" style="flex:1;display:flex;flex-direction:column;"></div>
+<div class="footer">
+  <img class="logo" id="logo-img" src="" alt="GYODIFY"/>
+  <span class="swipe" id="swipe-cue">Swipe →</span>
+</div>
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#FDF0E8');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#2B1F1A');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#D4845A');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#8B5E3C');
+const logoEl = document.getElementById('logo-img');
+if (G.logos && G.logos.dark) logoEl.src = 'data:image/png;base64,' + G.logos.dark;
+const slideNum = ctx.slide_num || 1;
+const totalSlides = ctx.total_slides || 5;
+document.getElementById('ghost-num').textContent = String(slideNum).padStart(2,'0');
+const swipeCue = document.getElementById('swipe-cue');
+if (ctx.is_cta_slide) swipeCue.textContent = '';
+const eyebrow = document.getElementById('eyebrow');
+const headline = document.getElementById('headline');
+const middle = document.getElementById('middle-area');
+if (ctx.is_cta_slide) {
+  eyebrow.textContent = '';
+  headline.textContent = '';
+  middle.innerHTML = `
+    <div class="cta-center">
+      <div class="cta-headline">${(ctx.slide_headline || 'Ready to GYODIFY?').toUpperCase()}</div>
+      <div class="cta-btn">Link in bio · gyodify.shop</div>
+    </div>`;
+} else if (ctx.is_hook_slide) {
+  eyebrow.textContent = ctx.product_name || 'GYODIFY';
+  headline.innerHTML = (ctx.hook || '').toUpperCase().replace(/\./,'.<br/><span class="hl">').replace(/(?<=<span class="hl">[^<]*)$/,'</span>') || ctx.hook || '';
+  middle.innerHTML = `<div class="step-text" style="margin-top:8px;">${ctx.slide_body || ''}</div>`;
+} else {
+  eyebrow.textContent = `Step ${slideNum - 1} of ${totalSlides - 2}`;
+  headline.innerHTML = `<span class="hl">${ctx.slide_headline || ''}</span>`;
+  const bodyLines = (ctx.slide_body || '').split('\n').filter(Boolean);
+  const stepsHtml = bodyLines.map((line, i) =>
+    `<div class="step"><div class="step-num">${slideNum - 1}.${i+1}</div><div class="step-text">${line}</div></div>`
+  ).join('') || `<div class="step"><div class="step-num">${slideNum}</div><div class="step-text">${ctx.slide_body || ''}</div></div>`;
+  middle.innerHTML = `<div class="steps">${stepsHtml}</div>`;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+# GYODIFY Engine Settings
+
+# ── Post sequence (LOCKED — do not change order) ──
+# 1=Carousel, 2=Reel, 3=Post, 4=Carousel, 5=Reel, 6=Post → repeat
+post_sequence: [1, 2, 3, 4, 5, 6]
+
+# ── Language rotation ──
+languages:
+  weights:
+    hinglish: 35
+    english: 25
+    hindi: 20
+    marathi: 20
+  max_same_streak: 2          # never same language 3 days running
+  force_marathi_festivals: true  # Gudi Padwa, Ganeshotsav etc → always Marathi
+
+# ── Products ──
+products:
+  exclude_kids: true           # flip to false when kids line is ready
+  # NOTE: "Baby Tee" is a WOMEN'S cropped-fit style — NOT a kids product
+  baby_tee_whitelist: true
+  product_repeat_cooldown_days: 5
+  cache_ttl_hours: 24
+  request_delay_seconds: 1
+  max_pages: 10
+  image_width: 1024            # Shopify ?width= param
+
+# ── Image output ──
+image:
+  post_width: 1080
+  post_height: 1350
+  reel_width: 1080
+  reel_height: 1920
+  device_scale_factor: 2       # Playwright 2x for crisp PNGs
+
+# ── Reel specs ──
+reel:
+  fps: 30
+  min_duration_s: 7
+  max_duration_s: 20
+  end_card_duration_s: 1.5
+  beat_duration_s: 2.0
+  safe_top_px: 250
+  safe_bottom_px: 350
+  safe_right_px: 120
+  codec: libx264
+  crf: 20
+  preset: veryfast
+  audio_codec: aac
+  audio_bitrate: 128k
+  target_lufs: -14
+
+# ── Carousel ──
+carousel:
+  min_slides: 4
+  max_slides: 8
+  hook_slide: 1
+  cta_slide: last
+
+# ── Hashtags ──
+hashtags:
+  total_count: 18
+  broad_fashion: 4
+  niche: 6
+  intent_community: 3
+  branded: 2             # always #gyodify #wearwhatyouthink
+  trend_of_day: 3
+
+# ── LLM ──
+llm:
+  chain:
+    - provider: gemini
+      model: gemini-1.5-flash
+      env_key: GEMINI_API_KEY
+      daily_request_budget: 40
+    - provider: groq
+      model: llama-3.1-8b-instant
+      env_key: GROQ_API_KEY
+      daily_request_budget: 30
+    - provider: openrouter
+      model: meta-llama/llama-3.1-8b-instruct:free
+      env_key: OPENROUTER_API_KEY
+      daily_request_budget: 20
+    - provider: offline
+      model: template_fallback
+  temperature:
+    ideation: 0.8
+    copywriting: 0.6
+    qa_critic: 0.3
+  json_repair_retries: 2
+  max_retries_on_429: 3
+
+# ── QA gate ──
+qa:
+  min_critic_score: 7.0
+  max_auto_regenerations: 2
+  caption_min_words: 30
+  caption_max_words: 180
+  hashtag_min: 15
+  hashtag_max: 20
+  originality_lookback_days: 60
+
+# ── Delivery ──
+telegram:
+  max_file_size_mb: 48      # Telegram bot limit is 50MB
+  retry_count: 3
+  retry_delay_s: 5
+
+# ── Scheduling ──
+schedule:
+  cron_utc: "30 1 * * *"   # 07:00 IST
+  timeout_minutes: 25
+  artifact_retention_days: 14
+
+# ── Feature flags ──
+features:
+  rembg_background_removal: false   # enable if runner has memory headroom
+  pexels_broll: false                # enable when PEXELS_API_KEY is set
+  youtube_trending: false            # enable when YOUTUBE_API_KEY is set

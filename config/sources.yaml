@@ -1,0 +1,40 @@
+# GYODIFY Research Sources
+
+google_trends:
+  base_url: "https://trends.google.com/trends/trendingsearches/daily/rss"
+  geo: "IN"
+  seed_terms:
+    - "oversized tee"
+    - "graphic tee"
+    - "streetwear india"
+    - "college outfit"
+    - "wedding outfit men"
+    - "winter fashion"
+    - "y2k fashion"
+    - "dark academia outfit"
+    - "outfit ideas"
+    - "affordable fashion india"
+
+google_news_queries:
+  - "Indian fashion trends"
+  - "Gen Z India style"
+  - "streetwear India 2026"
+  - "Indian college fashion"
+  - "bollywood fashion trends"
+  - "affordable fashion India"
+
+reddit_feeds:
+  - subreddit: "IndianMeMes"
+    max_posts: 10
+  - subreddit: "indianfashionadvice"
+    max_posts: 10
+  - subreddit: "streetwear"
+    max_posts: 5
+  - subreddit: "IndianTeenagers"
+    max_posts: 10
+  - subreddit: "CollegeIndia"
+    max_posts: 8
+  - subreddit: "india"
+    max_posts: 5
+  - subreddit: "mumbai"
+    max_posts: 5

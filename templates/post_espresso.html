@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1350px;overflow:hidden;}
+body{background:var(--p-bg,#2B2320);color:var(--p-fg,#F5EFE6);font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;display:flex;flex-direction:column;padding:7% 8%;position:relative;}
+.arc{position:absolute;right:-20%;bottom:-20%;width:70%;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--p-acc,#F4A261);opacity:.2;}
+.arc2{position:absolute;right:-10%;bottom:-10%;width:50%;aspect-ratio:1;border-radius:50%;border:1.5px solid var(--p-acc,#F4A261);opacity:.12;}
+.logo-top{height:16px;margin-bottom:auto;position:relative;z-index:1;}
+.main{font-family:'Bebas Neue',sans-serif;font-size:92px;line-height:.88;color:var(--p-fg,#F5EFE6);position:relative;z-index:1;margin-bottom:14px;}
+.main .hl{color:var(--p-acc,#F4A261);}
+.sub{font-size:16px;color:var(--p-fg,#F5EFE6);opacity:.5;line-height:1.5;position:relative;z-index:1;margin-bottom:20px;max-width:85%;}
+.cta-pill{display:inline-block;background:var(--p-acc,#F4A261);color:var(--p-bg,#2B2320);font-size:11px;font-weight:700;padding:10px 20px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:1;}
+.handle{position:absolute;bottom:7%;left:8%;font-size:12px;font-weight:500;color:var(--p-fg,#F5EFE6);opacity:.35;letter-spacing:.04em;z-index:1;}
+</style>
+</head>
+<body>
+<div class="arc"></div>
+<div class="arc2"></div>
+<img class="logo-top" id="logo-img" src="" alt="GYODIFY"/>
+<div class="main" id="main-text"></div>
+<div class="sub" id="sub-text"></div>
+<span class="cta-pill" id="cta-text">Shop now → gyodify.shop</span>
+<div class="handle">@gyodify</div>
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#2B2320');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#F5EFE6');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#F4A261');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#E8E0D8');
+const logoEl = document.getElementById('logo-img');
+if (G.logos && G.logos.white) logoEl.src = 'data:image/png;base64,' + G.logos.white;
+const hook = ctx.hook || G.brand?.tagline || 'Loud tees. Quiet prices.';
+const words = hook.split(' ');
+const breakAt = Math.floor(words.length / 2);
+const l1 = words.slice(0, breakAt).join(' ');
+const l2 = words.slice(breakAt).join(' ');
+document.getElementById('main-text').innerHTML =
+  `${l1}<br/><span class="hl">${l2}</span>`;
+const captionLines = (ctx.caption || '').split('\n').filter(Boolean);
+document.getElementById('sub-text').textContent = captionLines[1] || captionLines[0] || '';
+const price = Math.round(ctx.price_min || 349);
+document.getElementById('cta-text').textContent = `From ₹${price} → gyodify.shop`;
+</script>
+</body>
+</html>

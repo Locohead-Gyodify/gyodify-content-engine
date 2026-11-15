@@ -1,0 +1,118 @@
+# GYODIFY Brand Bible
+# Hard-coded from spec — edit carefully
+
+brand:
+  name: GYODIFY
+  tagline: "Your design. Your style. Your GYODIFY."
+  core_idea: "Wear what you think."
+  url: https://gyodify.shop
+  instagram: "@gyodify"
+  hashtag_brand: "#gyodify"
+  hashtag_tagline: "#wearwhatyouthink"
+
+# ── Colour palette ──
+# Base palette (strict brand anchors)
+palette:
+  background: "#FFFFFF"
+  charcoal: "#1C1C1C"
+  oxblood: "#7A0F1A"
+  text_on_accent: "#FFFFFF"
+  border: "#E8E5E2"
+  warm_grey: "#6B6865"
+  # NEVER: neon red, gradients, glow, rainbow, bright crimson
+
+# ── 6-position feed palette (playful, warm, contrasting) ──
+feed_positions:
+  1:  # Carousel — editorial warm cream
+    bg: "#F5EFE6"
+    fg: "#2B2320"
+    accent: "#C4705A"
+    accent2: "#8B4A3C"
+    template: carousel_cream
+    format: carousel
+  2:  # Reel — deep sage + coral
+    bg: "#2D3B2F"
+    fg: "#E8F0E0"
+    accent: "#F4A261"
+    accent2: "#E76F51"
+    template: reel_sage
+    format: reel
+  3:  # Post — dusty warm + oxblood
+    bg: "#E8E0D8"
+    fg: "#1C1C1C"
+    accent: "#7A0F1A"
+    accent2: "#C4705A"
+    template: post_dusty
+    format: post
+  4:  # Carousel — peach cream + coral
+    bg: "#FDF0E8"
+    fg: "#2B1F1A"
+    accent: "#D4845A"
+    accent2: "#8B5E3C"
+    template: carousel_peach
+    format: carousel
+  5:  # Reel — midnight indigo + sage/gold
+    bg: "#1A1F2E"
+    fg: "#E8ECFF"
+    accent: "#A8D8A8"
+    accent2: "#F4C842"
+    template: reel_midnight
+    format: reel
+  6:  # Post — dark espresso + coral
+    bg: "#2B2320"
+    fg: "#F5EFE6"
+    accent: "#F4A261"
+    accent2: "#E8E0D8"
+    template: post_espresso
+    format: post
+
+# ── Typography ──
+typography:
+  headline: "Space Grotesk"
+  display: "Bebas Neue"
+  body: "Inter"
+  monospace: "JetBrains Mono"
+  devanagari: "Noto Sans Devanagari"
+  font_dir: "assets/fonts/"
+  rendering: playwright_chromium  # raqm fallback
+
+# ── Logo ──
+logo:
+  primary: "assets/logo/gyodify_dark.png"
+  white: "assets/logo/gyodify_white.png"
+  cache_url: "https://gyodify.shop/cdn/shop/files/Gyodify.png"
+
+# ── Voice ──
+voice:
+  en: "crisp, witty, minimal slang. Gen-Z but never cringe."
+  hinglish: "how young urban Indians actually text. Default for meme content."
+  hi: "conversational modern Hindi, not shuddh/formal."
+  mr: "natural everyday Marathi, not stiff translation."
+  never: "mean, political, religious, body-shaming, sexual, profane, fake urgency"
+
+# ── Content pillars (target % over 14 days) ──
+content_pillars:
+  - id: product_spotlight
+    label: "Product Spotlight / New Drop"
+    target_pct: 25
+    formats: [carousel, post]
+  - id: relatable_meme
+    label: "Relatable Meme (brand style)"
+    target_pct: 25
+    formats: [reel, post]
+  - id: trend_festival
+    label: "Trend / Festival Tie-in"
+    target_pct: 20
+    formats: [carousel, post, reel]
+  - id: styling_tips
+    label: "Styling Tips / Outfit Ideas"
+    target_pct: 15
+    formats: [carousel, reel]
+  - id: custom_print
+    label: "Custom Print Promo"
+    target_pct: 10
+    formats: [carousel, reel]
+  - id: behind_brand
+    label: "Fabric / Fit / Shipping Info"
+    target_pct: 5
+    formats: [carousel]
