@@ -53,7 +53,7 @@ jobs:
       - name: Install system dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y ffmpeg fonts-noto libraqm0
+          sudo apt-get install -y ffmpeg fonts-noto libraqm1 libasound2t64
 
       - name: Install Python dependencies
         run: |
@@ -63,7 +63,6 @@ jobs:
       - name: Install Playwright Chromium
         run: |
           playwright install chromium
-          playwright install-deps chromium
 
       - name: Run content engine
         env:
