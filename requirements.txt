@@ -1,0 +1,41 @@
+# GYODIFY Content Engine — pinned dependencies
+# Last verified: November 2026
+
+# Core
+requests==2.31.0
+pyyaml==6.0.1
+pydantic==2.5.0
+python-dotenv==1.0.0
+tenacity==8.2.3
+jinja2==3.1.2
+
+# Data / feeds
+feedparser==6.0.11
+python-dateutil==2.8.2
+fuzzywuzzy==0.18.0
+python-Levenshtein==0.27.5
+
+# Image rendering
+Pillow==10.1.0
+playwright==1.40.0
+
+# Video / audio
+moviepy==1.0.3
+edge-tts==6.1.9
+gTTS==2.4.0
+
+# LLM providers
+google-generativeai==0.3.2
+groq==0.4.1
+openai==1.3.5
+
+# Telegram
+python-telegram-bot==20.7
+
+# Background removal (optional, comment out if runner OOMs)
+# rembg==2.0.50
+
+# Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+responses==0.24.1

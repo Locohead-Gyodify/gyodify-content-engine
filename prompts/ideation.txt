@@ -1,0 +1,20 @@
+Brand: GYODIFY | "Wear what you think." | Oversized graphic tees | Starting ₹349 | Free shipping India
+Instagram: @gyodify | Hashtags: #gyodify #wearwhatyouthink
+
+POST FORMAT TODAY: {post_format}
+LANGUAGE TODAY: {language}
+
+TODAY'S RESEARCH SIGNALS:
+{signals_text}
+
+AVAILABLE PRODUCTS:
+{products_text}
+
+RECENT POST HISTORY (avoid repeating these hooks):
+{history_text}
+
+CONTENT PILLAR MIX LAST 14 DAYS: {pillar_mix}
+
+Generate exactly 5 content concepts for a {post_format} post.
+Each must be original, brand-fit, and use the research signals above.
+Return a JSON array of 5 objects.

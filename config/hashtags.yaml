@@ -1,0 +1,77 @@
+# GYODIFY Hashtag Pools
+# Engine picks from each bucket daily — never duplicates previous day's set
+
+branded:   # always included
+  - "#gyodify"
+  - "#wearwhatyouthink"
+
+broad_fashion:
+  - "#fashion"
+  - "#style"
+  - "#ootd"
+  - "#outfitoftheday"
+  - "#mensfashion"
+  - "#womensfashion"
+  - "#indianfashion"
+  - "#streetstyle"
+  - "#fashionista"
+  - "#lookoftheday"
+  - "#styleinspo"
+  - "#fashionblogger"
+
+niche:
+  - "#oversizedtee"
+  - "#oversizedfashion"
+  - "#graphictee"
+  - "#graphicteeshirt"
+  - "#streetwearindia"
+  - "#streetwear"
+  - "#customtee"
+  - "#customtshirt"
+  - "#customprint"
+  - "#printontee"
+  - "#casualwear"
+  - "#loosefit"
+  - "#oversizedfit"
+  - "#teeshirt"
+  - "#tshirtdesign"
+  - "#dropshoulder"
+  - "#unisexfashion"
+
+intent_community:
+  - "#relatable"
+  - "#moodoftheday"
+  - "#vibes"
+  - "#maincharacter"
+  - "#collegelife"
+  - "#campusstyle"
+  - "#wardrobecheck"
+  - "#outfitcheck"
+  - "#fitcheck"
+  - "#nothingwear"
+  - "#fashionhumour"
+  - "#desivibes"
+
+india_specific:
+  - "#indiafashion"
+  - "#shoppersofinstagram"
+  - "#shoponline"
+  - "#freeshipping"
+  - "#fashionunder500"
+  - "#affordablefashion"
+  - "#desi"
+  - "#mumbaifashion"
+  - "#delhifashion"
+  - "#punefashion"
+  - "#bangalorefashion"
+
+festival:
+  diwali: ["#diwali", "#diwali2026", "#happydiwali", "#diwaligifts", "#festivewear"]
+  holi: ["#holi", "#happyholi", "#holifestival", "#colorsofholi"]
+  gudi_padwa: ["#gudhi_padwa", "#gudhipadwa", "#marathinewyear", "#gudhi"]
+  ganeshotsav: ["#ganeshchaturthi", "#ganeshotsav", "#ganpati", "#ganpatibappamorya"]
+  navratri: ["#navratri", "#navratri2026", "#garba", "#dandiya"]
+  christmas: ["#christmas", "#xmas", "#christmasgifts", "#festivegifts"]
+  newyear: ["#newyear", "#newyear2027", "#happynewyear"]
+  valentines: ["#valentinesday", "#valentinegifts", "#love"]
+  ipl: ["#ipl", "#iplseason", "#cricket", "#t20"]

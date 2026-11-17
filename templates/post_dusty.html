@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1350px;overflow:hidden;}
+body{background:var(--p-bg,#E8E0D8);color:var(--p-fg,#1C1C1C);font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;display:flex;flex-direction:column;position:relative;}
+.top-band{background:var(--p-acc,#7A0F1A);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.top-tag{font-size:11px;font-weight:700;color:white;letter-spacing:.10em;text-transform:uppercase;}
+.logo{height:16px;}
+.body-area{flex:1;display:flex;flex-direction:column;justify-content:center;padding:48px;position:relative;overflow:hidden;}
+.deco{position:absolute;right:-8%;top:10%;width:55%;aspect-ratio:1;border-radius:50%;background:var(--p-acc2,#C4705A);opacity:.12;}
+.quote{font-family:'Bebas Neue',sans-serif;font-size:88px;line-height:.88;color:var(--p-fg,#1C1C1C);position:relative;z-index:1;margin-bottom:20px;}
+.quote .hl{color:var(--p-acc,#7A0F1A);}
+.sub{font-size:18px;color:var(--p-fg,#1C1C1C);opacity:.6;line-height:1.5;position:relative;z-index:1;max-width:88%;}
+.bottom-band{background:var(--p-fg,#1C1C1C);padding:20px 48px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;}
+.price{font-size:14px;font-weight:700;color:white;}
+.cta{font-size:11px;font-weight:600;color:var(--p-acc2,#C4705A);letter-spacing:.08em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="top-band">
+  <span class="top-tag" id="top-tag">@gyodify</span>
+  <img class="logo" id="logo-img" src="" alt="GYODIFY"/>
+</div>
+<div class="body-area">
+  <div class="deco"></div>
+  <div class="quote" id="quote-text"></div>
+  <div class="sub" id="sub-text"></div>
+</div>
+<div class="bottom-band">
+  <span class="price" id="price-text">From ₹349 · Free shipping 🇮🇳</span>
+  <span class="cta">gyodify.shop</span>
+</div>
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#E8E0D8');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#1C1C1C');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#7A0F1A');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#C4705A');
+const logoEl = document.getElementById('logo-img');
+if (G.logos && G.logos.white) logoEl.src = 'data:image/png;base64,' + G.logos.white;
+const hook = ctx.hook || G.brand?.tagline || 'Wear what you think.';
+const words = hook.split(' ');
+const mid = Math.floor(words.length / 2);
+const firstHalf = words.slice(0, mid).join(' ');
+const secondHalf = words.slice(mid).join(' ');
+document.getElementById('quote-text').innerHTML = `${firstHalf}<br/><span class="hl">${secondHalf}</span>`;
+document.getElementById('sub-text').textContent = ctx.caption ? ctx.caption.split('\n')[1] || '' : '';
+document.getElementById('price-text').textContent = `From ₹${Math.round(ctx.price_min || 349)} · Free shipping 🇮🇳`;
+if (ctx.is_new_drop) document.getElementById('top-tag').textContent = 'New Drop 🔥';
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1920px;overflow:hidden;}
+body{background:var(--p-bg,#1A1F2E);color:var(--p-fg,#E8ECFF);font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;display:flex;flex-direction:column;padding:8%;position:relative;}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(168,216,168,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(168,216,168,.04) 1px,transparent 1px);background-size:20% 10.4%;}
+.flash{position:absolute;top:28%;right:-5%;font-family:'Bebas Neue',sans-serif;font-size:200px;line-height:1;color:var(--p-acc2,#F4C842);opacity:.08;z-index:1;transform:rotate(15deg);}
+.tag{display:inline-block;border:1.5px solid var(--p-acc,#A8D8A8);font-size:11px;font-weight:600;color:var(--p-acc,#A8D8A8);letter-spacing:.10em;text-transform:uppercase;padding:5px 14px;border-radius:3px;position:relative;z-index:2;align-self:flex-start;margin-bottom:auto;}
+.main{font-family:'Bebas Neue',sans-serif;font-size:96px;line-height:.88;color:var(--p-fg,#E8ECFF);position:relative;z-index:2;margin-bottom:16px;}
+.main .hl{color:var(--p-acc,#A8D8A8);}
+.main .hl2{color:var(--p-acc2,#F4C842);}
+.sub{font-size:16px;color:var(--p-fg);opacity:.5;line-height:1.4;position:relative;z-index:2;margin-bottom:18px;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid var(--p-acc,#A8D8A8);color:var(--p-acc,#A8D8A8);font-size:11px;font-weight:700;padding:10px 18px;border-radius:3px;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:2;align-self:flex-start;}
+.logo-corner{height:14px;position:absolute;bottom:9%;right:8%;z-index:2;}
+/* Beat card */
+.beat-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8%;z-index:2;}
+.beat-text{font-family:'Bebas Neue',sans-serif;font-size:88px;line-height:.90;color:var(--p-fg);text-align:center;}
+.beat-hl{color:var(--p-acc,#A8D8A8);}
+.beat-sub{font-size:16px;color:var(--p-fg);opacity:.5;text-align:center;margin-top:16px;}
+/* End card */
+.endcard-wrap{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;}
+.endcard-logo{height:40px;margin-bottom:20px;}
+.endcard-url{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--p-acc,#A8D8A8);letter-spacing:.04em;}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<div class="flash">✦</div>
+<div id="main-area" style="display:flex;flex-direction:column;height:100%;position:relative;z-index:2;"></div>
+<img class="logo-corner" id="logo-corner" src="" alt="GYODIFY"/>
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#1A1F2E');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#E8ECFF');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#A8D8A8');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#F4C842');
+const lc = document.getElementById('logo-corner');
+if (G.logos && G.logos.white) lc.src = 'data:image/png;base64,' + G.logos.white;
+const area = document.getElementById('main-area');
+if (ctx.is_end_card) {
+  lc.style.display = 'none';
+  area.innerHTML = `<div class="endcard-wrap"><img class="endcard-logo" id="ec" src=""/><div class="endcard-url">gyodify.shop</div></div>`;
+  const ec = document.getElementById('ec');
+  if (G.logos && G.logos.white) ec.src = 'data:image/png;base64,' + G.logos.white;
+} else if (ctx.is_cover) {
+  const hook = ctx.hook || ctx.beat_text || 'Your meme. Our print.';
+  const price = Math.round(ctx.price_min || 349);
+  const words = hook.split(' ');
+  const breakAt = Math.ceil(words.length / 2);
+  const l1 = words.slice(0, breakAt).join(' ');
+  const l2 = words.slice(breakAt).join(' ');
+  area.innerHTML = `
+    <span class="tag">${ctx.is_new_drop ? 'New Drop' : 'Custom Print'}</span>
+    <div class="main">${l1}<br/><span class="hl">${l2}</span><br/><span class="hl2">₹${price}.</span></div>
+    <div class="sub">Free shipping · gyodify.shop</div>
+    <span class="cta-btn">See how ↗</span>`;
+} else {
+  const beat = ctx.beat_text || '';
+  const words = beat.split(' ');
+  const mid = Math.ceil(words.length / 2);
+  const l1 = words.slice(0, mid).join(' ');
+  const l2 = words.slice(mid).join(' ');
+  const beatNum = ctx.beat_index !== undefined ? ctx.beat_index + 1 : '';
+  area.innerHTML = `
+    <div class="beat-wrap">
+      <div class="beat-text">${beatNum ? `STEP ${beatNum}:<br/>` : ''}<span class="beat-hl">${l1}</span><br/>${l2}</div>
+      <div class="beat-sub">${ctx.product_name || 'gyodify.shop'}</div>
+    </div>`;
+}
+</script>
+</body>
+</html>

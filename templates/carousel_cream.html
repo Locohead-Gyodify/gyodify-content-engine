@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1350px;overflow:hidden;}
+body{
+  background:var(--p-bg,#F5EFE6);
+  color:var(--p-fg,#2B2320);
+  font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;
+  display:flex;flex-direction:column;padding:7% 8%;position:relative;
+}
+.shape1{position:absolute;right:-15%;top:-20%;width:60%;aspect-ratio:1;border-radius:50%;background:var(--p-acc,#C4705A);opacity:.12;}
+.shape2{position:absolute;left:-10%;bottom:-15%;width:50%;aspect-ratio:1;border-radius:50%;background:var(--p-acc2,#8B4A3C);opacity:.10;}
+.slide-num{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--p-acc,#C4705A);letter-spacing:.10em;margin-bottom:auto;position:relative;z-index:1;}
+.content{flex:1;display:flex;flex-direction:column;justify-content:flex-end;position:relative;z-index:1;}
+.eyebrow{font-size:9px;font-weight:600;color:var(--p-acc,#C4705A);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.headline{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:.92;color:var(--p-fg,#2B2320);margin-bottom:14px;}
+.headline .hl{color:var(--p-acc,#C4705A);}
+.body-text{font-size:14px;opacity:.7;line-height:1.5;max-width:85%;margin-bottom:18px;}
+.footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,0,0,.12);padding-top:12px;}
+.logo{height:16px;}
+.swipe{font-size:9px;font-weight:600;color:var(--p-acc,#C4705A);letter-spacing:.06em;text-transform:uppercase;}
+
+/* CTA slide */
+.cta-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:1;}
+.cta-headline{font-family:'Bebas Neue',sans-serif;font-size:72px;line-height:.92;text-align:center;color:var(--p-fg,#2B2320);margin-bottom:20px;}
+.cta-btn{display:inline-block;background:var(--p-acc,#C4705A);color:white;font-size:12px;font-weight:700;padding:12px 28px;border-radius:3px;letter-spacing:.08em;text-transform:uppercase;}
+
+/* Product slide */
+.product-wrap{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;}
+.product-img{max-width:60%;max-height:60%;object-fit:contain;}
+.price-pill{display:inline-block;background:var(--p-acc,#C4705A);color:white;font-size:11px;font-weight:700;padding:5px 14px;border-radius:3px;letter-spacing:.04em;margin-bottom:8px;}
+</style>
+</head>
+<body>
+<div class="shape1"></div>
+<div class="shape2"></div>
+<div class="slide-num" id="slide-num"></div>
+
+<div id="content-area"></div>
+
+<div class="footer">
+  <img class="logo" id="logo-img" src="" alt="GYODIFY"/>
+  <span class="swipe" id="swipe-cue">Swipe →</span>
+</div>
+
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+
+// Set CSS variables
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#F5EFE6');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#2B2320');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#C4705A');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#8B4A3C');
+
+// Logo
+const logoEl = document.getElementById('logo-img');
+if (G.logos && G.logos.dark) {
+  logoEl.src = 'data:image/png;base64,' + G.logos.dark;
+}
+
+// Slide number
+const slideNum = ctx.slide_num || 1;
+const totalSlides = ctx.total_slides || 5;
+document.getElementById('slide-num').textContent = `0${slideNum} / 0${totalSlides}`;
+
+// Swipe cue
+const swipeCue = document.getElementById('swipe-cue');
+if (ctx.is_cta_slide) swipeCue.textContent = '';
+else if (slideNum === totalSlides - 1) swipeCue.textContent = 'Last slide →';
+
+// Content
+const area = document.getElementById('content-area');
+area.style.flex = '1';
+area.style.display = 'flex';
+area.style.flexDirection = 'column';
+area.style.justifyContent = 'flex-end';
+area.style.position = 'relative';
+area.style.zIndex = '1';
+
+if (ctx.is_cta_slide) {
+  area.innerHTML = `
+    <div class="cta-wrap">
+      <div class="cta-headline">${(ctx.slide_headline || 'Shop Now').toUpperCase()}</div>
+      <div class="cta-btn">Link in bio · gyodify.shop</div>
+    </div>`;
+} else if (ctx.is_hook_slide) {
+  area.innerHTML = `
+    <div class="eyebrow">${ctx.product_name || 'GYODIFY'}</div>
+    <div class="headline">${(ctx.hook || G.context.hook || '').toUpperCase().replace(/\./g,'.<br/>')}</div>
+    <div class="body-text">${ctx.slide_body || ''}</div>`;
+} else if (G.productImage && slideNum === 2) {
+  area.innerHTML = `
+    <div class="product-wrap">
+      <img class="product-img" src="${G.productImage}" alt="${ctx.product_name || 'GYODIFY Tee'}"/>
+    </div>
+    <div>
+      <span class="price-pill">₹${Math.round(ctx.price_min || 349)} · Free shipping</span><br/>
+      <div class="eyebrow">${ctx.product_name || 'Oversized Graphic Tee'}</div>
+    </div>`;
+} else {
+  area.innerHTML = `
+    <div class="eyebrow">${ctx.slide_num ? `Step ${ctx.slide_num - 1}` : ''}</div>
+    <div class="headline" style="font-size:48px;">${ctx.slide_headline || ''}</div>
+    <div class="body-text">${ctx.slide_body || ''}</div>`;
+}
+</script>
+</body>
+</html>

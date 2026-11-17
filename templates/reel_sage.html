@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--GYODIFY_INJECT-->
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{width:1080px;height:1920px;overflow:hidden;}
+body{
+  background:var(--p-bg,#2D3B2F);
+  color:var(--p-fg,#E8F0E0);
+  font-family:'Space Grotesk','Noto Sans Devanagari',sans-serif;
+  display:flex;flex-direction:column;padding:8%;
+  position:relative;
+}
+.tape{
+  position:absolute;top:14%;left:0;right:0;
+  background:var(--p-acc,#F4A261);
+  transform:rotate(-2deg);
+  padding:14px 0;text-align:center;
+  font-family:'Bebas Neue',sans-serif;font-size:28px;
+  color:white;letter-spacing:.08em;z-index:2;
+}
+.handle{
+  font-size:11px;font-weight:600;color:var(--p-acc,#F4A261);
+  letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:auto;position:relative;z-index:3;
+}
+.main{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:96px;line-height:.88;
+  color:var(--p-fg,#E8F0E0);
+  position:relative;z-index:3;
+  margin-top:42%;
+}
+.main .hl{color:var(--p-acc,#F4A261);}
+.sub{
+  font-size:18px;color:var(--p-fg,#E8F0E0);opacity:.6;
+  line-height:1.4;margin-top:14px;position:relative;z-index:3;
+}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--p-acc,#F4A261);color:white;
+  font-size:12px;font-weight:700;
+  padding:12px 22px;border-radius:3px;margin-top:20px;
+  letter-spacing:.06em;text-transform:uppercase;
+  position:relative;z-index:3;align-self:flex-start;
+}
+.logo-corner{
+  height:16px;position:absolute;bottom:9%;right:8%;z-index:3;
+}
+/* Safe zones overlay */
+.safe-top{position:absolute;top:0;left:0;right:0;height:13%;background:rgba(0,0,0,.0);z-index:1;}
+.safe-bottom{position:absolute;bottom:0;left:0;right:0;height:19%;background:rgba(0,0,0,.0);z-index:1;}
+
+/* Beat card mode */
+.beat-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;z-index:3;
+}
+.beat-text{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:88px;line-height:.90;
+  color:var(--p-fg,#E8F0E0);text-align:center;
+}
+.beat-text .hl{color:var(--p-acc,#F4A261);}
+.beat-sub{
+  font-size:16px;color:var(--p-fg);opacity:.5;
+  text-align:center;margin-top:16px;
+}
+/* End card */
+.endcard-wrap{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;position:relative;z-index:3;
+}
+.endcard-logo{height:40px;margin-bottom:20px;}
+.endcard-url{
+  font-family:'Bebas Neue',sans-serif;font-size:48px;
+  color:var(--p-acc,#F4A261);letter-spacing:.04em;
+}
+</style>
+</head>
+<body>
+<div id="main-content"></div>
+<img class="logo-corner" id="logo-corner" src="" alt="GYODIFY"/>
+<script>
+const G = window.GYODIFY || {};
+const ctx = G.context || {};
+const palette = G.palette || {};
+document.documentElement.style.setProperty('--p-bg', palette.bg || '#2D3B2F');
+document.documentElement.style.setProperty('--p-fg', palette.fg || '#E8F0E0');
+document.documentElement.style.setProperty('--p-acc', palette.accent || '#F4A261');
+document.documentElement.style.setProperty('--p-acc2', palette.accent2 || '#E76F51');
+const logoCorner = document.getElementById('logo-corner');
+if (G.logos && G.logos.white) logoCorner.src = 'data:image/png;base64,' + G.logos.white;
+const area = document.getElementById('main-content');
+area.style.display = 'flex';
+area.style.flexDirection = 'column';
+area.style.height = '100%';
+area.style.width = '100%';
+area.style.position = 'absolute';
+area.style.top = '0'; area.style.left = '0';
+area.style.padding = '8%';
+if (ctx.is_end_card) {
+  logoCorner.style.display = 'none';
+  area.innerHTML = `
+    <div class="endcard-wrap">
+      <img class="endcard-logo" id="ec-logo" src="" alt="GYODIFY"/>
+      <div class="endcard-url">gyodify.shop</div>
+    </div>`;
+  const ecLogo = document.getElementById('ec-logo');
+  if (G.logos && G.logos.white) ecLogo.src = 'data:image/png;base64,' + G.logos.white;
+} else if (ctx.is_cover) {
+  const hook = ctx.hook || ctx.beat_text || 'Wear what you think.';
+  const words = hook.split(' ');
+  const breakAt = Math.ceil(words.length / 2);
+  const line1 = words.slice(0, breakAt).join(' ');
+  const line2 = words.slice(breakAt).join(' ');
+  const tapeLine = `WEAR WHAT YOU THINK ✦ GYODIFY ✦ FREE SHIPPING ✦ `.repeat(4);
+  area.innerHTML = `
+    <div class="tape">${tapeLine}</div>
+    <div class="handle">@gyodify · Reel</div>
+    <div class="main">${line1}<br/><span class="hl">${line2}</span></div>
+    <div class="sub">${ctx.caption ? ctx.caption.split('\n')[0] : ''}</div>
+    <span class="cta-btn">Shop the look ↗</span>`;
+} else {
+  const beat = ctx.beat_text || '';
+  const words = beat.split(' ');
+  const mid = Math.ceil(words.length / 2);
+  const l1 = words.slice(0, mid).join(' ');
+  const l2 = words.slice(mid).join(' ');
+  area.innerHTML = `
+    <div class="beat-wrap">
+      <div class="beat-text">${l1}<br/><span class="hl">${l2}</span></div>
+      <div class="beat-sub">${ctx.product_name || ''}</div>
+    </div>`;
+}
+</script>
+</body>
+</html>
