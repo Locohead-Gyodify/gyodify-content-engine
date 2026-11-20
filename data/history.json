@@ -1,7 +1,20 @@
 {
   "current_position": 1,
-  "last_run": null,
+  "last_run": "2026-11-20T05:48:26.659344",
   "last_telegram_update_id": 0,
-  "posts": [],
+  "posts": [
+    {
+      "pillar": "brand personality",
+      "product": "unisex-dryfit-t-shirt",
+      "language": "marathi",
+      "hook": "oversized_debates",
+      "qa_score": 0.0,
+      "feedback": null,
+      "date": "2026-11-20",
+      "position": 1,
+      "format": "carousel",
+      "template": "carousel_cream"
+    }
+  ],
   "feedback": []
 }
