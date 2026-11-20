@@ -31,7 +31,7 @@ image:
   post_height: 1350
   reel_width: 1080
   reel_height: 1920
-  device_scale_factor: 2       # Playwright 2x for crisp PNGs
+  device_scale_factor: 1      # Playwright 2x for crisp PNGs
 
 # ── Reel specs ──
 reel:
