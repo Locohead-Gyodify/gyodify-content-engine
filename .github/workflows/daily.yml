@@ -1,8 +1,8 @@
 name: GYODIFY Daily Content Engine
 
 on:
-  schedule:
-    - cron: "30 1 * * *"   # 07:00 IST (GitHub cron may run a few mins late)
+  # schedule:
+  #   - cron: "30 1 * * *"   # 07:00 IST (temporarily disabled)
   workflow_dispatch:
     inputs:
       dry_run:
