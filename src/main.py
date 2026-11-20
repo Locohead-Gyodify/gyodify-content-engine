@@ -233,11 +233,16 @@ def run(args: argparse.Namespace) -> dict:
                 if success:
                     media_paths.append(post_path)
 
-        except Exception as e:
-            log.error(f"Rendering failed: {e}")
-            run_summary["stages"]["render"] = {"error": str(e)}
-
-        run_summary["stages"]["render"] = {"files": [str(p) for p in media_paths]}
+                except Exception as e:
+            log.exception(f"Rendering failed: {e}")
+            run_summary["stages"]["render"] = {
+                "error": str(e),
+                "files": [str(p) for p in media_paths],
+            }
+        else:
+            run_summary["stages"]["render"] = {
+                "files": [str(p) for p in media_paths],
+            }
         log.info(f"Rendered {len(media_paths)} files")
 
         # ── Stage 7: QA gate ──────────────────────────────
