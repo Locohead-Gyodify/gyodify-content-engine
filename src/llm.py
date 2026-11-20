@@ -56,27 +56,38 @@ class LLMProvider:
         raise NotImplementedError
 
 
+
 class GeminiProvider(LLMProvider):
     def call(self, prompt: str, temperature: float = 0.7,
              system: str = "") -> LLMResponse:
-        import google.generativeai as genai
-        genai.configure(api_key=self.api_key)
-        model = genai.GenerativeModel(
-            self.model,
+        from google import genai
+        from google.genai import types
+    
+        client = genai.Client(api_key=self.api_key)
+
+        t0 = time.monotonic()
+
+        config = types.GenerateContentConfig(
+            temperature=temperature,
+            max_output_tokens=2000,
             system_instruction=system if system else None,
         )
-        t0 = time.monotonic()
-        full_prompt = f"{system}\n\n{prompt}" if system and not model._system_instruction else prompt
-        resp = model.generate_content(
-            full_prompt,
-            generation_config={"temperature": temperature, "max_output_tokens": 2000},
+
+        resp = client.models.generate_content(
+            model=self.model,
+            contents=prompt,
+            config=config,
         )
+
         ms = int((time.monotonic() - t0) * 1000)
         self._calls_today += 1
+
+        usage = getattr(resp, "usage_metadata", None)
+
         return LLMResponse(
-            text=resp.text,
+            text=resp.text or "",
             provider=self.name,
-            tokens_used=getattr(resp.usage_metadata, "total_token_count", 0),
+            tokens_used=getattr(usage, "total_token_count", 0) or 0,
             latency_ms=ms,
         )
 
