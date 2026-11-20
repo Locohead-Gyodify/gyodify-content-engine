@@ -101,7 +101,7 @@ window.GYODIFY = {json.dumps({
         "tagline": brand["brand"]["tagline"],
         "url": brand["brand"]["url"],
     },
-    "logos": {{"dark": logo_dark, "white": logo_white}},
+    "logos": {"dark": logo_dark, "white": logo_white},
     "productImage": product_img,
 })};
 </script>
