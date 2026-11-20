@@ -267,14 +267,23 @@ def run(args: argparse.Namespace) -> dict:
         run_summary["llm_provider"] = llm_summary["providers_used"][0] if llm_summary["providers_used"] else "offline"
         run_summary["tokens_used"] = llm_summary["total_tokens"]
 
-        state.record_post({
-            "pillar": concept.angle,
-            "product": featured_product.handle if featured_product else None,
-            "language": language,
-            "hook": copy.hook,
-            "qa_score": qa.overall_score,
-            "feedback": None,
-        })
+      
+        # Record posting history only after a successful real delivery.
+        if not args.dry_run:
+            if not qa.passed:
+                log.error("QA failed — post will not be delivered or recorded")
+                run_summary["error"] = "QA failed"
+                return run_summary
+
+            state.record_post({
+                "pillar": concept.angle,
+                "product": featured_product.handle if featured_product else None,
+                "language": language,
+                "hook": copy.hook,
+                "qa_score": qa.overall_score,
+                "feedback": None,
+            })
+
 
         # Save run summary
         summary_path = output_dir / "run_summary.json"
