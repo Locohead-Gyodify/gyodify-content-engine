@@ -209,6 +209,7 @@ def run(args: argparse.Namespace) -> dict:
             "date": today_str,
         }
 
+        
         try:
             if fmt == "carousel":
                 from src.render.carousel import render_carousel
@@ -233,7 +234,7 @@ def run(args: argparse.Namespace) -> dict:
                 if success:
                     media_paths.append(post_path)
 
-                except Exception as e:
+        except Exception as e:
             log.exception(f"Rendering failed: {e}")
             run_summary["stages"]["render"] = {
                 "error": str(e),
@@ -243,7 +244,9 @@ def run(args: argparse.Namespace) -> dict:
             run_summary["stages"]["render"] = {
                 "files": [str(p) for p in media_paths],
             }
+
         log.info(f"Rendered {len(media_paths)} files")
+
 
         # ── Stage 7: QA gate ──────────────────────────────
         log.info("Stage 7: QA gate...")
